@@ -108,7 +108,7 @@ export default function ChangePassword() {
             <select
               id="type"
               onChange={e => setNewsData(newsData => ({ ...newsData, type: e.target.value }))}
-              value={newsData.status}
+              value={newsData.type}
             >
               {config.types.map(type => <option
                 key={type}
