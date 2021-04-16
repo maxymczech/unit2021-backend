@@ -1,13 +1,54 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --color-text: #000;
+  --color-main: #82e600;
+  --color-main-2: #4e6b7c;
+  --color-white: #fff;
+
+  --color-secondary-blue-1: #003b71;
+  --color-secondary-blue-2: #0075a9;
+  --color-secondary-blue-3: #54c0e8;
+  --color-secondary-green: #008556;
+  --color-secondary-orange: #ffb600;
+  --color-secondary-red: #e1251b;
+  --color-secondary-purple-1: #cb007b;
+  --color-secondary-purple-2: #722282;
+  --color-secondary-grey: #414141;
+
+  --color-secondary-pale-blue-1: #5c6790;
+  --color-secondary-pale-blue-2: #669dc0;
+  --color-secondary-pale-blue-3: #6dbfe9;
+  --color-secondary-pale-green: #4aa987;
+  --color-secondary-pale-orange: #fec157;
+  --color-secondary-pale-red: #ee7660;
+  --color-secondary-pale-purple-1: #d05f94;
+  --color-secondary-pale-purple-2: #8d6899;
+  --color-secondary-pale-grey: #7a7a7a
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text);
+}
+
+div.react-toast-notifications__toast {
+  background-color: var(--color-secondary-pale-green);
+}
+
+.react-toast-notifications__toast__content,
+.react-toast-notifications__toast__dismiss-button {
+  color: var(--color-white);
+}
+
+.react-toast-notifications__toast--success .react-toast-notifications__toast__icon-wrapper {
+  background-color: var(--color-secondary-green);
+  color: var(--color-white);
 }
