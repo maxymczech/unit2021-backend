@@ -34,7 +34,7 @@ export default function Users() {
       });
       setPages(docs)
     });
-  }, [isSuperadmin, setPages, userData.locations]);
+  }, [isSuperadmin]);
 
   const deletePage = id => {
     if (window.confirm('Do you really want to delete this page?')) {
@@ -74,7 +74,7 @@ export default function Users() {
           </thead>
           <tbody>
             {pages.map(page => <tr key={page.id}>
-              <td>{page.data().icon && <img src={page.data().icon} class="icon" alt="icon" />}</td>
+              <td>{page.data().icon && <img src={page.data().icon} className="icon" alt="icon" />}</td>
               <td>{page.data().title_en || page.data().title_cs}</td>
               <td>{(page.data().locations || []).join(', ')}</td>
               <td>
