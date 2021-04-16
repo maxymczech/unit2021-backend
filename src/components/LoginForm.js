@@ -1,10 +1,11 @@
 import { auth } from '../config/firebase';
 import { useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
 
 export default function LoginForm({ onSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const { addToast } = useToasts();
 
   const handleSubmit = e => {
     e.stopPropagation();
@@ -13,7 +14,9 @@ export default function LoginForm({ onSuccess }) {
     if (email && password) {
       auth.signInWithEmailAndPassword(email, password).then(userCredential => {
       }).catch(error => {
-        setError(error.message);
+        addToast(error.message, {
+          appearance: 'error'
+        });
       });
     }
   }
@@ -39,7 +42,6 @@ export default function LoginForm({ onSuccess }) {
           value={password}
         />
       </div>
-      {error ? <div className="error">{error}</div> : null}
       <div className="input-submit">
         <button type="submit">Login</button>
       </div>

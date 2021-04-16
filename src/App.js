@@ -11,6 +11,7 @@ import LoginForm from './components/LoginForm';
 import NavMenu from './components/NavMenu';
 import Settings from './components/settings/Settings';
 import { ToastProvider } from 'react-toast-notifications';
+import Users from './components/users/Users';
 
 export const AuthContext = createContext({
   currentUser: null,
@@ -43,40 +44,44 @@ export default function App() {
     });
   }, []);
 
-  return currentUser && userSnapshot ? (
+  return (
     <AuthContext.Provider value={{ currentUser, userSnapshot }}>
     <Router>
     <ToastProvider
       autoDismiss={true}
       placement="bottom-center"
     >
-      <NavMenu
-        currentUser={currentUser}
-        userSnapshot={userSnapshot}
-      />
-      <div className="page-content">
-        <Switch>
-          <Route path="/news">
-            {/* <News /> */}
-          </Route>
-          <Route path="/pages">
-            {/* <Pages /> */}
-          </Route>
-          <Route path="/categories">
-            {/* <Categories /> */}
-          </Route>
-          <Route path="/users">
-            {/* <Users /> */}
-          </Route>
-          <Route path="/settings">
-            <Settings />
-          </Route>
-        </Switch>
-      </div>
+      {currentUser && userSnapshot ? (
+        <>
+          <NavMenu
+            currentUser={currentUser}
+            userSnapshot={userSnapshot}
+          />
+          <div className="page-content">
+            <Switch>
+              <Route path="/news">
+                {/* <News /> */}
+              </Route>
+              <Route path="/pages">
+                {/* <Pages /> */}
+              </Route>
+              <Route path="/categories">
+                {/* <Categories /> */}
+              </Route>
+              <Route path="/users">
+                <Users />
+              </Route>
+              <Route path="/settings">
+                <Settings />
+              </Route>
+            </Switch>
+          </div>
+        </>
+      ) : (
+        <LoginForm />
+      )}
     </ToastProvider>
     </Router>
     </AuthContext.Provider>
-  ) : (
-    <LoginForm />
   );
 }

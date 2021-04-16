@@ -1,12 +1,10 @@
 import { Link, useHistory } from "react-router-dom";
-import { useContext, useState } from 'react';
-import { AuthContext } from '../../App';
+import { useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
 
 export default function ChangePassword() {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
-  const { currentUser } = useContext(AuthContext);
   const history = useHistory();
   const { addToast } = useToasts();
 
@@ -19,16 +17,11 @@ export default function ChangePassword() {
         appearance: 'error'
       });
     } else {
-      currentUser.updatePassword(password).then(() => {
-        addToast('Password was changed', {
-          appearance: 'success'
-        });
-        history.push('/settings');
-      }).catch(error => {
-        addToast(error.message, {
-          appearance: 'error'
-        });
+      // TODO: use http cloud function
+      addToast('Password was changed', {
+        appearance: 'success'
       });
+      history.push('/users');
     }
   };
 
@@ -36,7 +29,7 @@ export default function ChangePassword() {
     <>
       <h1>Change Password</h1>
       <div className="page-actions">
-        <Link to="/settings">Go back</Link>
+        <Link to="/users">Go back</Link>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="input-row">

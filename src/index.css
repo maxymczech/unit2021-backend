@@ -39,8 +39,12 @@ body {
   color: var(--color-text);
 }
 
-div.react-toast-notifications__toast {
+div.react-toast-notifications__toast--success {
   background-color: var(--color-secondary-pale-green);
+}
+
+div.react-toast-notifications__toast--error {
+  background-color: var(--color-secondary-pale-red);
 }
 
 .react-toast-notifications__toast__content,
@@ -50,5 +54,10 @@ div.react-toast-notifications__toast {
 
 .react-toast-notifications__toast--success .react-toast-notifications__toast__icon-wrapper {
   background-color: var(--color-secondary-green);
+  color: var(--color-white);
+}
+
+.react-toast-notifications__toast--error .react-toast-notifications__toast__icon-wrapper {
+  background-color: var(--color-secondary-red);
   color: var(--color-white);
 }
