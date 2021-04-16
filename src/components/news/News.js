@@ -18,25 +18,30 @@ import { useToasts } from 'react-toast-notifications';
 export default function Users() {
   const { userSnapshot } = useContext(AuthContext);
   const userData = (userSnapshot && userSnapshot.data()) || {};
+  const userId = (userSnapshot && userSnapshot.id) || '';
   const [news, setNews] = useState([]);
   const match = useRouteMatch();
   const { addToast } = useToasts();
 
   const isSuperadmin = ['superadmin'].includes(userData.role);
+  const isEditor = ['superadmin'].includes(userData.role);
 
   useEffect(() => {
     let query = db.collection('news');
     if (!isSuperadmin) {
       query = query.where('locations', 'array-contains-any', userData.locations);
     }
-    query.onSnapshot(querySnapshot => {
+    if (isEditor) {
+      query = query.where('author', '==', userId);
+    }
+    query.orderBy('itemDate', 'desc').onSnapshot(querySnapshot => {
       const docs = [];
       querySnapshot.forEach(doc => {
         docs.push(doc);
       });
       setNews(docs)
     });
-  }, [isSuperadmin]);
+  }, [isSuperadmin, isEditor, userId]);
 
   const deleteNews = id => {
     if (window.confirm('Do you really want to delete this news item?')) {

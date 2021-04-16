@@ -16,16 +16,21 @@ import { useToasts } from 'react-toast-notifications';
 export default function Users() {
   const { userSnapshot } = useContext(AuthContext);
   const userData = (userSnapshot && userSnapshot.data()) || {};
+  const userId = (userSnapshot && userSnapshot.id) || '';
   const [pages, setPages] = useState([]);
   const match = useRouteMatch();
   const { addToast } = useToasts();
 
   const isSuperadmin = ['superadmin'].includes(userData.role);
+  const isEditor = ['superadmin'].includes(userData.role);
 
   useEffect(() => {
     let query = db.collection('pages');
     if (!isSuperadmin) {
       query = query.where('locations', 'array-contains-any', userData.locations);
+    }
+    if (isEditor) {
+      query = query.where('author', '==', userId);
     }
     query.onSnapshot(querySnapshot => {
       const docs = [];
@@ -34,7 +39,7 @@ export default function Users() {
       });
       setPages(docs)
     });
-  }, [isSuperadmin]);
+  }, [isSuperadmin, isEditor, userId]);
 
   const deletePage = id => {
     if (window.confirm('Do you really want to delete this page?')) {

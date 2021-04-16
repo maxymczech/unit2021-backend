@@ -4,7 +4,8 @@ import {
   Link,
   useHistory,
 } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../App';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import { config } from '../../config/app';
@@ -13,7 +14,10 @@ import { useToasts } from 'react-toast-notifications';
 import { stateToHTML } from 'draft-js-export-html';
 
 export default function ChangePassword() {
+  const { userSnapshot } = useContext(AuthContext);
+  const userId = (userSnapshot && userSnapshot.id) || '';
   const [newsData, setNewsData] = useState({
+    author: userId,
     content_cs: '',
     content_en: '',
     itemDate: new Date(),
