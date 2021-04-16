@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import LoginForm from './components/LoginForm';
 import NavMenu from './components/NavMenu';
-// import News from './components/pages/News';
+import News from './components/news/News';
 import Pages from './components/pages/Pages';
 import Settings from './components/settings/Settings';
 import { ToastProvider } from 'react-toast-notifications';
@@ -55,14 +55,11 @@ export default function App() {
     >
       {currentUser && userSnapshot ? (
         <>
-          <NavMenu
-            currentUser={currentUser}
-            userSnapshot={userSnapshot}
-          />
+          <NavMenu />
           <div className="page-content">
             <Switch>
               <Route path="/news">
-                {/* <News /> */}
+                <News />
               </Route>
               <Route path="/pages">
                 <Pages />
