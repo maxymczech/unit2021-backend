@@ -72,7 +72,7 @@ export default function ChangePassword() {
             <label htmlFor="firstName">First name:</label>
             <input
               id="firstName"
-              onChange={e => setUserData(userdata => ({ ...userData, firstName: e.target.value }))}
+              onChange={e => setUserData(userData => ({ ...userData, firstName: e.target.value }))}
               value={userData.firstName}
             />
           </div>
@@ -80,7 +80,7 @@ export default function ChangePassword() {
             <label htmlFor="lastName">Last name:</label>
             <input
               id="lastName"
-              onChange={e => setUserData(userdata => ({ ...userData, lastName: e.target.value }))}
+              onChange={e => setUserData(userData => ({ ...userData, lastName: e.target.value }))}
               value={userData.lastName}
             />
           </div>
@@ -88,7 +88,7 @@ export default function ChangePassword() {
             <label htmlFor="language">Language:</label>
             <select
               id="language"
-              onChange={e => setUserData(userdata => ({ ...userData, language: e.target.value }))}
+              onChange={e => setUserData(userData => ({ ...userData, language: e.target.value }))}
               value={userData.language}
             >
               {config.languages.map(lang => <option
@@ -100,7 +100,7 @@ export default function ChangePassword() {
             <label htmlFor="deviceId">Device ID:</label>
             <input
               id="deviceId"
-              onChange={e => setUserData(userdata => ({ ...userData, deviceId: e.target.value }))}
+              onChange={e => setUserData(userData => ({ ...userData, deviceId: e.target.value }))}
               value={userData.deviceId}
             />
           </div>
@@ -108,7 +108,7 @@ export default function ChangePassword() {
             <label htmlFor="role">Role:</label>
             <select
               id="role"
-              onChange={e => setUserData(userdata => ({ ...userData, role: e.target.value }))}
+              onChange={e => setUserData(userData => ({ ...userData, role: e.target.value }))}
               value={userData.role}
             >
               {config.roles.map(role => <option
@@ -120,7 +120,7 @@ export default function ChangePassword() {
             <label htmlFor="status">Status:</label>
             <select
               id="status"
-              onChange={e => setUserData(userdata => ({ ...userData, status: e.target.value }))}
+              onChange={e => setUserData(userData => ({ ...userData, status: e.target.value }))}
               value={userData.status}
             >
               {config.statuses.map(status => <option

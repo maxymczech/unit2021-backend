@@ -47,7 +47,7 @@ export default function Settings() {
       <Route path={match.path}>
         <h1>Settings</h1>
         <div className="page-actions">
-          <Link to={`${match.path}/change-password`}>Change password</Link>
+          <Link to="/settings/change-password">Change password</Link>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="input-row">

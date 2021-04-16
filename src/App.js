@@ -9,6 +9,8 @@ import {
 } from "react-router-dom";
 import LoginForm from './components/LoginForm';
 import NavMenu from './components/NavMenu';
+// import News from './components/pages/News';
+import Pages from './components/pages/Pages';
 import Settings from './components/settings/Settings';
 import { ToastProvider } from 'react-toast-notifications';
 import Users from './components/users/Users';
@@ -63,7 +65,7 @@ export default function App() {
                 {/* <News /> */}
               </Route>
               <Route path="/pages">
-                {/* <Pages /> */}
+                <Pages />
               </Route>
               <Route path="/categories">
                 {/* <Categories /> */}
