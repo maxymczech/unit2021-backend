@@ -22,6 +22,8 @@ export default function ChangePassword() {
     content_en: '',
     // icon: '',
     locations: [],
+    // preview_cs: '',
+    // preview_en: '',
     title_cs: '',
     title_en: ''
   });
@@ -75,6 +77,7 @@ export default function ChangePassword() {
             <input
               id="title_cs"
               onChange={e => setPageData(pageData => ({ ...pageData, title_cs: e.target.value }))}
+              type="text"
               value={pageData.title_cs}
             />
           </div>
@@ -83,6 +86,7 @@ export default function ChangePassword() {
             <input
               id="title_en"
               onChange={e => setPageData(pageData => ({ ...pageData, title_en: e.target.value }))}
+              type="text"
               value={pageData.title_en}
             />
           </div>
@@ -115,6 +119,24 @@ export default function ChangePassword() {
               </select>
             </div>
           }
+          {/*
+          <div className="input-row">
+            <label htmlFor="preview_cs">Preview (cs):</label>
+            <input
+              id="preview_cs"
+              onChange={e => setPageData(pageData => ({ ...pageData, preview_cs: e.target.value }))}
+              value={pageData.preview_cs}
+            />
+          </div>
+          <div className="input-row">
+            <label htmlFor="preview_en">Preview (en):</label>
+            <input
+              id="preview_en"
+              onChange={e => setPageData(pageData => ({ ...pageData, preview_en: e.target.value }))}
+              value={pageData.preview_en}
+            />
+          </div>
+          */}
           <div className="wysiwyg-row">
             <label>Page content (cs)</label>
             <Editor

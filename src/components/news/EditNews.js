@@ -92,6 +92,7 @@ export default function ChangePassword() {
             <input
               id="title_cs"
               onChange={e => setNewsData(newsData => ({ ...newsData, title_cs: e.target.value }))}
+              type="text"
               value={newsData.title_cs}
             />
           </div>
@@ -100,6 +101,7 @@ export default function ChangePassword() {
             <input
               id="title_en"
               onChange={e => setNewsData(newsData => ({ ...newsData, title_en: e.target.value }))}
+              type="text"
               value={newsData.title_en}
             />
           </div>
@@ -143,6 +145,24 @@ export default function ChangePassword() {
               </select>
             </div>
           }
+          <div className="input-row">
+            <label htmlFor="preview_cs">Preview (cs):</label>
+            <input
+              id="preview_cs"
+              onChange={e => setNewsData(newsData => ({ ...newsData, preview_cs: e.target.value }))}
+              type="text"
+              value={newsData.preview_cs}
+            />
+          </div>
+          <div className="input-row">
+            <label htmlFor="preview_en">Preview (en):</label>
+            <input
+              id="preview_en"
+              onChange={e => setNewsData(newsData => ({ ...newsData, preview_en: e.target.value }))}
+              type="text"
+              value={newsData.preview_en}
+            />
+          </div>
           <div className="wysiwyg-row">
             <label>Page content (cs)</label>
             <Editor

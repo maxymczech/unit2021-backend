@@ -17,10 +17,15 @@ export default function Users() {
   const match = useRouteMatch();
 
   const isSuperadmin = ['superadmin'].includes(userData.role);
+  const isAdmin = ['admin'].includes(userData.role);
 
   useEffect(() => {
-    if (isSuperadmin) {
-      db.collection('users').onSnapshot(querySnapshot => {
+    let query = db.collection('users');
+    if (isAdmin) {
+      query = query.where('locations', 'array-contains-any', userData.locations);
+    }
+    if (isAdmin || isSuperadmin) {
+      query.onSnapshot(querySnapshot => {
         const docs = [];
         querySnapshot.forEach(doc => {
           docs.push(doc);
@@ -28,9 +33,9 @@ export default function Users() {
         setUsers(docs)
       });
     }
-  }, [isSuperadmin, setUsers]);
+  }, [isSuperadmin, isAdmin, setUsers]);
 
-  return isSuperadmin ? (
+  return (isAdmin || isSuperadmin) ? (
     <Switch>
       <Route path="/users/change-password/:id">
         <ChangePassword />
@@ -58,10 +63,12 @@ export default function Users() {
               <td>{user.data().role}</td>
               <td>{user.data().locations.join(', ')}</td>
               <td>{user.data().status}</td>
-              <td>
+              <td className="table-actions">
                 <Link to={`/users/edit/${user.id}`}>Edit</Link>
+                {/*
                 {' '}
                 <Link to={`/users/change-password/${user.id}`}>Change password</Link>
+                */}
               </td>
             </tr>)}
           </tbody>

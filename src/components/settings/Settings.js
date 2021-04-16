@@ -55,6 +55,10 @@ export default function Settings() {
             {userData.email}
           </div>
           <div className="input-row">
+            <label>Role:</label>
+            {userData.role}
+          </div>
+          <div className="input-row">
             <label>Locations:</label>
             {userData.locations.join(', ')}
           </div>
@@ -63,6 +67,7 @@ export default function Settings() {
             <input
               id="firstName"
               onChange={e => setFirstName(e.target.value)}
+              type="text"
               value={firstName}
             />
           </div>
@@ -71,6 +76,7 @@ export default function Settings() {
             <input
               id="lastName"
               onChange={e => setLastName(e.target.value)}
+              type="text"
               value={lastName}
             />
           </div>

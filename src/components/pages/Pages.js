@@ -22,7 +22,7 @@ export default function Users() {
   const { addToast } = useToasts();
 
   const isSuperadmin = ['superadmin'].includes(userData.role);
-  const isEditor = ['superadmin'].includes(userData.role);
+  const isEditor = ['editor'].includes(userData.role);
 
   useEffect(() => {
     let query = db.collection('pages');
@@ -68,7 +68,7 @@ export default function Users() {
         <div className="page-actions">
           <Link to="/pages/new">Create page</Link>
         </div>
-        {!pages.length ? <p>Loading data...</p> : <table className="data-table">
+        {!pages.length ? <p></p> : <table className="data-table">
           <thead>
             <tr>
               {/* <th>Icon</th> */}
@@ -82,7 +82,7 @@ export default function Users() {
               {/* <td>{page.data().icon && <img src={page.data().icon} className="icon" alt="icon" />}</td> */}
               <td>{page.data().title_en || page.data().title_cs}</td>
               <td>{(page.data().locations || []).join(', ')}</td>
-              <td>
+              <td className="table-actions">
                 <Link to={`/pages/edit/${page.id}`}>Edit</Link>
                 {' '}
                 <a href="#" onClick={() => { deletePage(page.id) }}>Delete</a>

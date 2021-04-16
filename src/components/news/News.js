@@ -24,7 +24,7 @@ export default function Users() {
   const { addToast } = useToasts();
 
   const isSuperadmin = ['superadmin'].includes(userData.role);
-  const isEditor = ['superadmin'].includes(userData.role);
+  const isEditor = ['editor'].includes(userData.role);
 
   useEffect(() => {
     let query = db.collection('news');
@@ -70,7 +70,7 @@ export default function Users() {
         <div className="page-actions">
           <Link to="/news/new">Create news item</Link>
         </div>
-        {!news.length ? <p>Loading data...</p> : <table className="data-table">
+        {!news.length ? <p></p> : <table className="data-table">
           <thead>
             <tr>
               {/* <th>Icon</th> */}
@@ -87,7 +87,7 @@ export default function Users() {
               <td>{config.typeNames[item.data().type]}</td>
               <td>{formatDate(item.data().itemDate.toDate())}</td>
               <td>{(item.data().locations || []).join(', ')}</td>
-              <td>
+              <td className="table-actions">
                 <Link to={`/news/edit/${item.id}`}>Edit</Link>
                 {' '}
                 <a href="#" onClick={() => { deleteNews(item.id) }}>Delete</a>
