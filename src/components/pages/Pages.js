@@ -66,7 +66,7 @@ export default function Users() {
         {!pages.length ? <p>Loading data...</p> : <table className="data-table">
           <thead>
             <tr>
-              <th>Icon</th>
+              {/* <th>Icon</th> */}
               <th>Title</th>
               <th>Location</th>
               <th>&nbsp;</th>
@@ -74,7 +74,7 @@ export default function Users() {
           </thead>
           <tbody>
             {pages.map(page => <tr key={page.id}>
-              <td>{page.data().icon && <img src={page.data().icon} className="icon" alt="icon" />}</td>
+              {/* <td>{page.data().icon && <img src={page.data().icon} className="icon" alt="icon" />}</td> */}
               <td>{page.data().title_en || page.data().title_cs}</td>
               <td>{(page.data().locations || []).join(', ')}</td>
               <td>

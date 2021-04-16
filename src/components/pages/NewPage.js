@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
+import { config } from '../../config/app';
 import { db } from '../../config/firebase';
 import { useToasts } from 'react-toast-notifications';
 import { stateToHTML } from 'draft-js-export-html';
@@ -15,7 +16,7 @@ export default function ChangePassword() {
   const [pageData, setPageData] = useState({
     content_cs: '',
     content_en: '',
-    icon: '',
+    // icon: '',
     locations: [],
     title_cs: '',
     title_en: ''
@@ -81,6 +82,7 @@ export default function ChangePassword() {
               value={pageData.title_en}
             />
           </div>
+          {/*
           <div className="input-row">
             <label htmlFor="icon">Icon:</label>
             <input
@@ -89,6 +91,7 @@ export default function ChangePassword() {
               value={pageData.icon}
             />
           </div>
+          */}
           {
             locations && 
             <div className="input-row">
@@ -115,6 +118,9 @@ export default function ChangePassword() {
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
               onEditorStateChange={editorState => setEditorState_cs(editorState)}
+              toolbar={{
+                options: config.editorOptions
+              }}
             />
           </div>
           <div className="wysiwyg-row">
@@ -124,6 +130,9 @@ export default function ChangePassword() {
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
               onEditorStateChange={editorState => setEditorState_en(editorState)}
+              toolbar={{
+                options: config.editorOptions
+              }}
             />
           </div>
           <div className="input-submit">
