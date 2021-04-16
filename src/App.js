@@ -30,7 +30,7 @@ export default function App() {
         return;
       }
 
-      db.collection('users').where('email', '==', user.email).get().then(querySnapshot => {
+      db.collection('users').where('email', '==', user.email).onSnapshot(querySnapshot => {
         if (querySnapshot.size === 1) {
           querySnapshot.forEach(doc => {
             const data = doc.data();
