@@ -48,7 +48,7 @@ export default function ChangePassword() {
       content_cs: stateToHTML(editorState_cs.getCurrentContent()),
       content_en: stateToHTML(editorState_en.getCurrentContent())
     }).then(() => {
-      addToast('News itemsaved', {
+      addToast('News item saved', {
         appearance: 'success'
       });
       history.push('/news');
@@ -101,7 +101,7 @@ export default function ChangePassword() {
               id="itemDate"
               onChange={e => setNewsData(newsData => ({ ...newsData, itemDate: new Date(e.target.value) }))}
               type="datetime-local"
-              value={newsData.itemDate.toISOString().slice(0,16)}
+              value={((isNaN(newsData.itemDate.getTime()) ? new Date() : newsData.itemDate) || new Date()).toISOString().slice(0,16)}
             />
           </div>
           {

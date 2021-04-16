@@ -121,7 +121,7 @@ export default function ChangePassword() {
               id="itemDate"
               onChange={e => setNewsData(newsData => ({ ...newsData, itemDate: new Date(e.target.value) }))}
               type="datetime-local"
-              value={newsData.itemDate.toISOString().slice(0,16)}
+              value={((isNaN(newsData.itemDate.getTime()) ? new Date() : newsData.itemDate) || new Date()).toISOString().slice(0,16)}
             />
           </div>
           {
