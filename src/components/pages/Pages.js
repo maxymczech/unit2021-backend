@@ -35,6 +35,10 @@ export default function Users() {
     query.onSnapshot(querySnapshot => {
       const docs = [];
       querySnapshot.forEach(doc => {
+        const docData = doc.data();
+        if (!isSuperadmin && !docData.locations.every(loc => userData.locations.includes(loc))) {
+          return;
+        }
         docs.push(doc);
       });
       setPages(docs)

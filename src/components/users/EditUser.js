@@ -3,7 +3,8 @@ import {
   useHistory,
   useParams
 } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../App';
 import { config } from '../../config/app';
 import { db } from '../../config/firebase';
 import { useToasts } from 'react-toast-notifications';
@@ -14,6 +15,10 @@ export default function ChangePassword() {
   const history = useHistory();
   const { addToast } = useToasts();
   const { id } = useParams();
+  const { userSnapshot } = useContext(AuthContext);
+  const currentUserData = (userSnapshot && userSnapshot.data()) || {};
+
+  const isSuperadmin = ['superadmin'].includes(currentUserData.role);
 
   useEffect(() => {
     db.collection('locations').get().then(querySnapshot => {
@@ -111,7 +116,7 @@ export default function ChangePassword() {
               onChange={e => setUserData(userData => ({ ...userData, role: e.target.value }))}
               value={userData.role}
             >
-              {config.roles.map(role => <option
+              {config.roles.filter(role => isSuperadmin || role !== 'superadmin').map(role => <option
                 key={role}
                 value={role}>{role}</option>)}
             </select>
@@ -129,7 +134,7 @@ export default function ChangePassword() {
             </select>
           </div>
           {
-            locations && 
+            isSuperadmin && locations && 
             <div className="input-row">
               <label htmlFor="locations">Locations:</label>
               <select

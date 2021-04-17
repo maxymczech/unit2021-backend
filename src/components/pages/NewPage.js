@@ -16,12 +16,13 @@ import { stateToHTML } from 'draft-js-export-html';
 export default function ChangePassword() {
   const { userSnapshot } = useContext(AuthContext);
   const userId = (userSnapshot && userSnapshot.id) || '';
+  const userData = (userSnapshot && userSnapshot.data()) || {};
   const [pageData, setPageData] = useState({
     author: userId,
     content_cs: '',
     content_en: '',
     // icon: '',
-    locations: [],
+    locations: [...userData.locations],
     // preview_cs: '',
     // preview_en: '',
     title_cs: '',
@@ -30,6 +31,7 @@ export default function ChangePassword() {
   const [locations, setLocations] = useState(null);
   const history = useHistory();
   const { addToast } = useToasts();
+  const isSuperadmin = ['superadmin'].includes(userData.role);
 
   const [editorState_cs, setEditorState_cs] = useState(EditorState.createEmpty());
   const [editorState_en, setEditorState_en] = useState(EditorState.createEmpty());
@@ -113,7 +115,10 @@ export default function ChangePassword() {
                 size="6"
                 value={pageData.locations}
               >
-                {locations.map(doc => <option
+                {locations.filter(doc => {
+                  if (isSuperadmin) return true;
+                  return userData.locations.includes(doc.id)
+                }).map(doc => <option
                   key={doc.id}
                   value={doc.id}>{doc.data().title}</option>)}
               </select>

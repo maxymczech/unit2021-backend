@@ -1,23 +1,41 @@
+/* eslint jsx-a11y/anchor-is-valid: 0 */
+
 import {
   Link,
   Switch,
   Route,
   useRouteMatch
 } from "react-router-dom";
+import { auth, db } from '../../config/firebase';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../App';
 import ChangePassword from './ChangePassword';
 import EditUser from './EditUser';
-import { db } from '../../config/firebase';
+import { useToasts } from 'react-toast-notifications';
 
 export default function Users() {
   const { userSnapshot } = useContext(AuthContext);
   const userData = (userSnapshot && userSnapshot.data()) || {};
   const [users, setUsers] = useState([]);
   const match = useRouteMatch();
+  const { addToast } = useToasts();
 
   const isSuperadmin = ['superadmin'].includes(userData.role);
   const isAdmin = ['admin'].includes(userData.role);
+
+  const sendResetPasswordEmail = email => {
+    if (email && window.confirm(`Do you really want to send password reset email to ${email}?`)) {
+      auth.sendPasswordResetEmail(email).then(() => {
+        addToast('Email with password reset link sent', {
+          appearance: 'success'
+        });
+      }).catch(error => {
+        addToast(error.message, {
+          appearance: 'error'
+        });
+      });
+    }
+  }
 
   useEffect(() => {
     let query = db.collection('users');
@@ -28,6 +46,10 @@ export default function Users() {
       query.onSnapshot(querySnapshot => {
         const docs = [];
         querySnapshot.forEach(doc => {
+          const data = doc.data();
+          if (!isSuperadmin && data.role === 'superadmin') {
+            return;
+          }
           docs.push(doc);
         });
         setUsers(docs)
@@ -69,6 +91,8 @@ export default function Users() {
                 {' '}
                 <Link to={`/users/change-password/${user.id}`}>Change password</Link>
                 */}
+                {' '}
+                <a href="#" onClick={() => sendResetPasswordEmail(user.data().email)}>Reset password</a>
               </td>
             </tr>)}
           </tbody>
